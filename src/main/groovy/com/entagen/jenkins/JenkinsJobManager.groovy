@@ -62,7 +62,7 @@ class JenkinsJobManager {
         for(ConcreteJob missingJob in missingJobs) {
             println "Creating missing job: ${missingJob.jobName} from ${missingJob.templateJob.jobName}"
             jenkinsApi.cloneJobForBranch(missingJob, templateJobs)
-            if (startOnCreate && missingJob.jobName ==~ /-build-/) { // only start build jobs
+            if (startOnCreate && missingJob.jobName ==~ /.*-build-.*/) { // only start build jobs
                 jenkinsApi.startJob(missingJob)
             }
         }
